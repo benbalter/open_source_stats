@@ -13,7 +13,7 @@ def pretty_print_hash(hash)
   puts table.split("\n")[1...-1].join("\n") + "\n\n"
 end
 
-puts "# Open source actvity for the 24-hour period beging at #{OpenSourceStats.start_time.strftime("%l:%S %p %Z on %B %-d, %Y")}\n\n"
+puts "# Open source actvity for the 24-hour period begining at #{OpenSourceStats.start_time.strftime("%l:%S %p %Z on %B %-d, %Y")}\n\n"
 
 puts "## Overall\n\n"
 pretty_print_hash oss.stats
