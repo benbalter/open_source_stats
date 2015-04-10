@@ -1,31 +1,23 @@
-# OpenSourceStats
+# Open Source Stats
 
-TODO: Write a gem description
+*A quick script to generate metrics about the contribution your organization makes to the open source community in a 24-hour period*.
 
-## Installation
+## What it looks at
 
-Add this line to your application's Gemfile:
+* Public activity across all public repositories from members of a given team
+* Public activity across all users on repositories owned by a given organization or organizations
 
-```ruby
-gem 'open_source_stats'
-```
+## How it works
 
-And then execute:
+By doing terrible, terrible things to GitHub's events API.
 
-    $ bundle
+## Setup
 
-Or install it yourself as:
+1. Clone down the repo
+2. Create a `.env` file and add the following:
+  * `GITHUB_TOKEN` - A personal access token with `read:org` scope
+  * `GITHUB_TEAM_ID` - The numeric ID of the team to pull users from (e.g., 12345)
+  * `GITHUB_ORGS` - A comma separated list of the orgs to look at (e.g, `github,atom`)
+3. Run `bundle exec oss`
 
-    $ gem install open_source_stats
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( https://github.com/[my-github-username]/open_source_stats/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+This will spit markdown formatted results into standard out.

@@ -1,0 +1,38 @@
+#! /usr/bin/env ruby
+
+require_relative "../lib/open_source_stats"
+require 'active_support/core_ext/string/inflections'
+require 'terminal-table'
+
+oss = OpenSourceStats.new
+
+def pretty_print_hash(hash)
+  rows = []
+  hash.each { |key, value| rows << [key.to_s.humanize, value] }
+  table = Terminal::Table.new(:rows => rows, :style => { :border_i => "|" }, :headings => ["Metric", "Count"]).to_s
+  puts table.split("\n")[1...-1].join("\n") + "\n\n"
+end
+
+puts "# Open source actvity for the 24-hour period beging at #{OpenSourceStats.start_time.strftime("%l:%S %p %Z on %B %-d, %Y")}\n\n"
+
+puts "## Overall\n\n"
+pretty_print_hash oss.stats
+
+puts "## By organization\n\n"
+oss.orgs.each do |org|
+  puts "### #{org.name.humanize}\n\n"
+  pretty_print_hash oss.stats(org.events)
+end
+
+puts "## Top users\n\n"
+users = oss.users.reject { |u| u.login == "hubot" }.sort_by { |u| u.events.count }.reverse[0...10]
+users.each_with_index do |user, index|
+  puts "### #{index+1}. @#{user.login}\n\n"
+  pretty_print_hash oss.stats(user.events)
+end
+
+puts "## Most active repositories\n\n"
+repos = oss.events.group_by { |e| e.repo }.map { |k,v| { k => v.count } }.sort_by { |r| r.values.first  }.reverse[0...10]
+repos.each_with_index do |repo, index|
+  puts "#{index + 1}. #{repo.keys.first} - #{repo.values.first} events"
+end
