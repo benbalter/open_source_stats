@@ -1,0 +1,3 @@
+#!/bin/sh
+
+bundle exec gem build open_source_stats.gemspec
