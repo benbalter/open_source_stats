@@ -13,7 +13,7 @@ By doing terrible, terrible things to GitHub's events API.
 
 ## Setup
 
-1. Clone down the repo
+1. `gem install open_source_stats`
 2. Create a `.env` file and add the following:
   * `GITHUB_TOKEN` - A personal access token with `read:org` scope
   * `GITHUB_TEAM_ID` - The numeric ID of the team to pull users from (e.g., 12345)
