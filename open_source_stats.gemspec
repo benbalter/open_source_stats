@@ -8,9 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = OpenSourceStats::VERSION
   spec.authors       = ["Ben Balter"]
   spec.email         = ["ben.balter@github.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{A quick script to generate metrics about the contribution your organization makes to the open source community in a 24-hour period}
+  spec.homepage      = "https://github.com/benbalter/open_source_stats"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
